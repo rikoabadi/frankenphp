@@ -800,8 +800,8 @@ static char *frankenphp_getenv(const char *name, size_t name_len) {
 }
 
 sapi_module_struct frankenphp_sapi_module = {
-    "frankenphp", /* name */
-    "FrankenPHP", /* pretty name */
+    "turbophp", /* name */
+    "TurboPHP", /* pretty name */
 
     frankenphp_startup,          /* startup */
     php_module_shutdown_wrapper, /* shutdown */
@@ -1112,7 +1112,7 @@ static void *execute_script_cli(void *arg) {
    * The SAPI name "cli" is hardcoded into too many programs... let's usurp it.
    */
   php_embed_module.name = "cli";
-  php_embed_module.pretty_name = "PHP CLI embedded in FrankenPHP";
+  php_embed_module.pretty_name = "PHP CLI embedded in TurboPHP";
   php_embed_module.register_server_variables = sapi_cli_register_variables;
 
   php_embed_init(cli_argc, cli_argv);
