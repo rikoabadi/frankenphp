@@ -799,9 +799,9 @@ static char *frankenphp_getenv(const char *name, size_t name_len) {
   return NULL;
 }
 
-sapi_module_struct frankenphp_sapi_module = {
-    "frankenphp", /* name */
-    "FrankenPHP", /* pretty name */
+sapi_module_struct turbophp_sapi_module = {
+    "turbophp", /* name */
+    "TurboPHP", /* pretty name */
 
     frankenphp_startup,          /* startup */
     php_module_shutdown_wrapper, /* shutdown */
@@ -906,7 +906,7 @@ static void *php_main(void *arg) {
 #endif
 #endif
 
-  sapi_startup(&frankenphp_sapi_module);
+  sapi_startup(&turbophp_sapi_module);
 
 #ifdef ZEND_MAX_EXECUTION_TIMERS
   /* overwrite php.ini with custom user settings */
@@ -918,10 +918,10 @@ static void *php_main(void *arg) {
 #endif
 
   if (php_ini_overrides != NULL) {
-    frankenphp_sapi_module.ini_entries = php_ini_overrides;
+    turbophp_sapi_module.ini_entries = php_ini_overrides;
   }
 
-  frankenphp_sapi_module.startup(&frankenphp_sapi_module);
+  turbophp_sapi_module.startup(&turbophp_sapi_module);
 
   /* check if a default filter is set in php.ini and only filter if
    * it is, this is deprecated and will be removed in PHP 9 */
@@ -932,16 +932,16 @@ static void *php_main(void *arg) {
   go_frankenphp_main_thread_is_ready();
 
   /* channel closed, shutdown gracefully */
-  frankenphp_sapi_module.shutdown(&frankenphp_sapi_module);
+  turbophp_sapi_module.shutdown(&turbophp_sapi_module);
 
   sapi_shutdown();
 #ifdef ZTS
   tsrm_shutdown();
 #endif
 
-  if (frankenphp_sapi_module.ini_entries) {
-    free((char *)frankenphp_sapi_module.ini_entries);
-    frankenphp_sapi_module.ini_entries = NULL;
+  if (turbophp_sapi_module.ini_entries) {
+    free((char *)turbophp_sapi_module.ini_entries);
+    turbophp_sapi_module.ini_entries = NULL;
   }
 
   go_frankenphp_shutdown_main_thread();
@@ -1112,7 +1112,7 @@ static void *execute_script_cli(void *arg) {
    * The SAPI name "cli" is hardcoded into too many programs... let's usurp it.
    */
   php_embed_module.name = "cli";
-  php_embed_module.pretty_name = "PHP CLI embedded in FrankenPHP";
+  php_embed_module.pretty_name = "PHP CLI embedded in TurboPHP";
   php_embed_module.register_server_variables = sapi_cli_register_variables;
 
   php_embed_init(cli_argc, cli_argv);

@@ -91,6 +91,7 @@ frankenphp php-server
 - [Create **standalone**, self-executable PHP apps](https://frankenphp.dev/docs/embed/)
 - [Create static binaries](https://frankenphp.dev/docs/static/)
 - [Compile from sources](https://frankenphp.dev/docs/compile/)
+- [Build locally](docs/local-build.md)
 - [Monitoring FrankenPHP](https://frankenphp.dev/docs/metrics/)
 - [Laravel integration](https://frankenphp.dev/docs/laravel/)
 - [Known issues](https://frankenphp.dev/docs/known-issues/)
